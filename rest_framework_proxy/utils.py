@@ -48,15 +48,15 @@ class StreamingMultipart(object):
 
     def build_multipart_header(self, name, filename=None, content_type=None):
         output = []
-        output.append('--%s' % self.boundary)
+        output.append(('--%s' % self.boundary).encode('utf-8'))
 
         string = 'Content-Disposition: form-data; name="%s"' % name
         if filename:
             string += '; filename="%s"' % filename
-        output.append(string)
+        output.append(string.encode('utf-8'))
 
         if content_type:
-            output.append('Content-Type: %s' % content_type)
+            output.append(('Content-Type: %s' % content_type).encode('utf-8'))
 
         return '\r\n'.join(output)
 
